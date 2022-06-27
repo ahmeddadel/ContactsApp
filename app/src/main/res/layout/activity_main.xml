@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_portrait"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <include layout="@layout/toolbar_portrait" />
+
+    <fragment
+        android:id="@+id/listFrag"
+        android:name="com.dolla.fragmentsrecyclerview.ListFrag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        tools:layout="@layout/fragment_list" />
+
+    <fragment
+        android:id="@+id/detailFrag"
+        android:name="com.dolla.fragmentsrecyclerview.DetailFrag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_detail" />
+
+    <fragment
+        android:id="@+id/addPersonFrag"
+        android:name="com.dolla.fragmentsrecyclerview.AddPersonFrag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_add_person"/>
+
+</LinearLayout>
