@@ -1,6 +1,7 @@
 package com.dolla.fragmentsrecyclerview;
 
 import android.app.Application;
+import android.content.Intent;
 import android.database.Cursor;
 import android.provider.ContactsContract;
 
@@ -30,5 +31,6 @@ public class ApplicationClass extends Application {
             e.printStackTrace();
         }
     }
+
 
 }

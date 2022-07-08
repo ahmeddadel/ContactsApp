@@ -6,9 +6,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -34,10 +37,16 @@ public class MainActivity extends AppCompatActivity implements PersonAdapter.Ite
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 1);
-
-
+            findViewById(R.id.layout_land).setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    recreate();
+                    return true;
+                }
+            });
+            }
 
         tvName = findViewById(R.id.tvName);
         tvTelephone = findViewById(R.id.tvTelephone);
@@ -153,6 +162,14 @@ public class MainActivity extends AppCompatActivity implements PersonAdapter.Ite
                     .hideSoftInputFromWindow(
                             view.getWindowToken(), 0);
         }
+    }
+
+    public void refresh(){
+        Intent i = new Intent(MainActivity.this, MainActivity.class);
+        //finish();
+        //overridePendingTransition(0, 0);
+        startActivity(i);
+        //overridePendingTransition(0, 0);
     }
 
 }
