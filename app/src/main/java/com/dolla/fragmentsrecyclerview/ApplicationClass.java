@@ -1,24 +1,34 @@
 package com.dolla.fragmentsrecyclerview;
 
 import android.app.Application;
+import android.database.Cursor;
+import android.provider.ContactsContract;
 
 import java.util.ArrayList;
 
 public class ApplicationClass extends Application {
-    public static ArrayList<Person> people;
+    public static ArrayList<Person> people = new ArrayList<>();
+    ;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        people = new ArrayList<>();
-
-        people.add(new Person("Ahmed Adel", "01129025241"));
-        people.add(new Person("Abdallah Monzer", "01229465241"));
-        people.add(new Person("Ahmed Kamel", "01529028796"));
-        people.add(new Person("Mohamed Jamal", "01001252247"));
-        people.add(new Person("Omar Sakr", "01156994240"));
-        people.add(new Person("Ayman Ashraf", "010569870140"));
-
+        addContacts();
     }
+
+    public void addContacts() {
+        try {
+            Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+
+            while (phones.moveToNext()) {
+                String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                people.add(new Person(name, phoneNumber));
+            }
+            phones.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
